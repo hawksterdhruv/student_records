@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bootstrap Boilerplate</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
+  </head>
+  <body>
+    <div class="row">
+      <div class="col-3">
+        <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist">
+          <a class="nav-link active" id="students_list-tab" data-toggle="pill" href="#students_list" role="tab">Students List</a>
+          <a class="nav-link" id="add_students-tab" data-toggle="pill" href="#add_students" role="tab">Add New Students</a>
+          <a class="nav-link" id="courses_list-tab" data-toggle="pill" href="#courses_list" role="tab">Courses List</a>
+          <a class="nav-link" id="add_courses-tab" data-toggle="pill" href="#add_courses" role="tab">Add New Courses</a>
+          <a class="nav-link" id="results_list-tab" data-toggle="pill" href="#results_list" role="tab">Results List</a>
+          <a class="nav-link" id="add_results-tab" data-toggle="pill" href="#add_results" role="tab">Add New Results</a>
+        </div>
+      </div>
+      <div class="col-9">
+        <div class="tab-content" id="v-pills-tabContent">
+          <div class="tab-pane fade show active" id="students_list" role="tabpanel">
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">First Name</th>
+                  <th scope="col">Family Name</th>
+                  <th scope="col">Date of Birth</th>
+                  <th scope="col">Email</th>                  
+                  <th scope="col"></th>                  
+                </tr>
+              </thead>
+
+              <tbody>
+                {% for student in data['students'] %}
+                <tr>
+                  <td>{{student.id}}</td>
+                  <td>{{student.first_name}}</td>
+                  <td>{{student.family_name}}</td>
+                  <td>{{student.date_of_birth}}</td>
+                  <td>{{student.email}}</td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+          <div class="tab-pane fade" id="add_students" role="tabpanel">
+            <form>
+              <div class="form-group">
+                <label for="first_name">First Name</label>
+                <input type="text" class="form-control" id="first_name" placeholder="Enter First Name" />
+              </div>
+
+              <div class="form-group">
+                <label for="family_name">Family Name</label>
+                <input type="text" class="form-control" id="family_name" placeholder="Enter Family Name" />
+              </div>
+
+              <div class="form-group">
+                <label for="email">Email address</label>
+                <input type="email" class="form-control" id="email" placeholder="Enter email" />
+              </div>
+
+              <div class="form-group">
+                <label for="date_of_birth">Date of Birth</label>
+                <input type="date" class="form-control" id="date_of_birth" placeholder="Enter Date of Birth in YYYY-MM-DD fromat" />
+              </div>
+
+              <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+          </div>
+          <div class="tab-pane fade" id="courses_list" role="tabpanel"><table class="table table-striped">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Course Name</th>
+                <th scope="col"></th>  
+              </tr>
+            </thead>
+
+            <tbody>
+              {% for course in data['courses'] %}
+              <tr>
+                <td>{{course.id}}</td>
+                <td>{{course.course_name}}</td>
+                
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table></div>
+          <div class="tab-pane fade" id="add_courses" role="tabpanel">
+            <form>
+              <div class="form-group">
+                <label for="course_name">First Name</label>
+                <input type="text" class="form-control" id="course_name" placeholder="Enter Course Name" />
+              </div>
+
+              <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+          </div>
+          <div class="tab-pane fade" id="results_list" role="tabpanel">...</div>
+          <div class="tab-pane fade" id="add_results" role="tabpanel">
+            <form>
+              <div class="form-group">
+                <label for="student_name">Select Student</label>
+                <select class="form-control" id="student_name"></select>
+              </div>
+              <div class="form-group">
+                <label for="course_name">Select Course</label>
+                <select class="form-control" id="course_name"></select>
+              </div>
+
+              <div class="form-group">
+                <label for="grade">Select Grade</label>
+                <select class="form-control" id="grade">
+                  <option>A</option>
+                  <option>B</option>
+                  <option>C</option>
+                  <option>D</option>
+                  <option>E</option>
+                  <option>F</option>
+                </select>
+              </div>
+
+              <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+  </body>
+</html>
