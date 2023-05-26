@@ -125,6 +125,8 @@ def delete_student(student_id: int) -> Response:
     Returns:
         Response: Returns success if student deleted or Failure error message
     """
+    results = Result.query.filter_by(student_id=student_id)
+    [db.session.delete(result) for result in results]
     student = Student.query.get_or_404(student_id)
     db.session.delete(student)
     db.session.commit()
@@ -187,6 +189,8 @@ def delete_course(course_id: int) -> Response:
     Returns:
         Response: Returns success if course deleted or Failure error message
     """
+    results = Result.query.filter_by(course_id=course_id)
+    [db.session.delete(result) for result in results]
     course = Course.query.get_or_404(course_id)
     db.session.delete(course)
     db.session.commit()

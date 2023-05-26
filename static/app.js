@@ -70,6 +70,7 @@ delete_student = (student_id) => {
     dataType: "json",
   }).done(function (record) {
     list_student();
+    list_result();
     console.log(record);
     // clear table and call student_list
   });
@@ -140,6 +141,7 @@ delete_course = (course_id) => {
     dataType: "json",
   }).done(function (record) {
     list_course();
+    list_result();
     console.log(record);
     // clear table and call course_list
   });

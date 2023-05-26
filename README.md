@@ -13,7 +13,7 @@ Single page app to maintain students, courses, and their results
 ## Known Issues
 1. sqlite does not enforce foreign keys
 2. ~~Delete not working~~
-   1. Delete not cascading
+   1. ~~Delete not cascading~~ (Work around found: Solve Issue #1)
 3. ~~Validation not working~~
 4. ~~Give page title~~
 5. ~~Auto refresh page~~
@@ -23,7 +23,8 @@ Single page app to maintain students, courses, and their results
 9. Separate Views into separate module
 10. ~~Date of birth 10 years check missing~~
 11. ~~Success messages missing~~
-12. Delete messages missing
+12. Delete messages missing ?? 
 13. Form clear
 14. Grades in ENUM in the ORM
 15. Add validation for duplicate results
+16. Auto dismiss error/success messages??
