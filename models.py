@@ -1,5 +1,10 @@
-
+"""Models for Student Records
+- Written using flask-sqlalchemy
+- Currently also holds serializers and deserializers. 
+Author : Dhruv Shah
+"""
 from datetime import date
+from typing import Dict
 
 from db import db
 
@@ -11,7 +16,14 @@ class Student(db.Model):
     date_of_birth = db.Column(db.Date, nullable=False)
     email = db.Column(db.String, nullable=False)
 
-    def to_dict(self):
+    def to_dict(self) ->Dict[str, str]:
+        """Serializes Student records
+        ## NOTE : kind of a misnomer, considering this convert to a dictionary rather that JSON
+        ## But applicable for Current purposes. 
+
+        Returns:
+            Dict[str, str]: returns student record in dictionary format
+        """
         return {
             "id": self.id,
             "first_name": self.first_name,
@@ -21,13 +33,17 @@ class Student(db.Model):
         }
 
     @classmethod
-    def from_dict(cls, raw_student):
+    def from_dict(cls, raw_student:Dict):
+        """Deserializes Student records
+
+        Returns:
+            Student instance: returns student record object
+        """
         instance = cls()
         instance.first_name = raw_student['first_name']
         instance.family_name = raw_student['family_name']
         instance.email = raw_student['email']
-        instance.date_of_birth = date.fromisoformat(
-            raw_student['date_of_birth'])
+        instance.date_of_birth = date.fromisoformat(raw_student['date_of_birth'])
         return instance
 
 
@@ -36,6 +52,13 @@ class Course(db.Model):
     course_name = db.Column(db.String, nullable=False)
 
     def to_dict(self):
+        """Serializes Course records
+        ## NOTE : kind of a misnomer, considering this convert to a dictionary rather that JSON
+        ## But applicable for Current purposes. 
+
+        Returns:
+            Dict[str, str]: returns course record in dictionary format
+        """
         return {
             "id": self.id,
             "course_name": self.course_name
@@ -59,6 +82,13 @@ class Result(db.Model):
     course = db.relationship('Course')
 
     def to_dict(self):
+        """Serializes Result records
+        ## NOTE : kind of a misnomer, considering this convert to a dictionary rather that JSON
+        ## But applicable for Current purposes. 
+
+        Returns:
+            Dict[str, str]: returns result record in dictionary format
+        """
         return {
             "id": self.id,
             "student_id": self.student_id,
