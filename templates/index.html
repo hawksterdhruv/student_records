@@ -22,7 +22,7 @@
       <div class="col-9">
         <div class="tab-content" id="v-pills-tabContent">
           <div class="tab-pane fade show active" id="students_list" role="tabpanel">
-            <table class="table table-striped">
+            <table class="table table-striped" id="student_list-table">
               <thead>
                 <tr>
                   <th scope="col">#</th>
@@ -35,15 +35,7 @@
               </thead>
 
               <tbody>
-                {% for student in data['students'] %}
-                <tr>
-                  <td>{{student.id}}</td>
-                  <td>{{student.first_name}}</td>
-                  <td>{{student.family_name}}</td>
-                  <td>{{student.date_of_birth}}</td>
-                  <td>{{student.email}}</td>
-                </tr>
-                {% endfor %}
+
               </tbody>
             </table>
           </div>
@@ -51,71 +43,82 @@
             <form>
               <div class="form-group">
                 <label for="first_name">First Name</label>
-                <input type="text" class="form-control" id="first_name" placeholder="Enter First Name" />
+                <input type="text" class="form-control" name="first_name" placeholder="Enter First Name" />
               </div>
 
               <div class="form-group">
                 <label for="family_name">Family Name</label>
-                <input type="text" class="form-control" id="family_name" placeholder="Enter Family Name" />
+                <input type="text" class="form-control" name="family_name" placeholder="Enter Family Name" />
               </div>
 
               <div class="form-group">
                 <label for="email">Email address</label>
-                <input type="email" class="form-control" id="email" placeholder="Enter email" />
+                <input type="email" class="form-control" name="email" placeholder="Enter email" />
               </div>
 
               <div class="form-group">
                 <label for="date_of_birth">Date of Birth</label>
-                <input type="date" class="form-control" id="date_of_birth" placeholder="Enter Date of Birth in YYYY-MM-DD fromat" />
+                <input type="date" class="form-control" name="date_of_birth" placeholder="Enter Date of Birth in YYYY-MM-DD fromat" />
               </div>
 
               <button type="submit" class="btn btn-primary">Submit</button>
             </form>
           </div>
-          <div class="tab-pane fade" id="courses_list" role="tabpanel"><table class="table table-striped">
-            <thead>
-              <tr>
-                <th scope="col">#</th>
-                <th scope="col">Course Name</th>
-                <th scope="col"></th>  
-              </tr>
-            </thead>
+          <div class="tab-pane fade" id="courses_list" role="tabpanel">
+            <table class="table table-striped" id="courses_list-table">
+              <thead>
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">Course Name</th>
+                  <th scope="col"></th>  
+                </tr>
+              </thead>
 
-            <tbody>
-              {% for course in data['courses'] %}
-              <tr>
-                <td>{{course.id}}</td>
-                <td>{{course.course_name}}</td>
-                
-              </tr>
-              {% endfor %}
-            </tbody>
-          </table></div>
+              <tbody>
+
+              </tbody>
+            </table>
+          </div>
           <div class="tab-pane fade" id="add_courses" role="tabpanel">
             <form>
               <div class="form-group">
-                <label for="course_name">First Name</label>
-                <input type="text" class="form-control" id="course_name" placeholder="Enter Course Name" />
+                <label for="course_name">Course Name</label>
+                <input type="text" class="form-control" name="course_name" placeholder="Enter Course Name" />
               </div>
 
               <button type="submit" class="btn btn-primary">Submit</button>
             </form>
           </div>
-          <div class="tab-pane fade" id="results_list" role="tabpanel">...</div>
+          <div class="tab-pane fade" id="results_list" role="tabpanel">
+            <table class="table table-striped" id="results_list-table">
+              <thead>
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">Student Name</th>
+                  <th scope="col">Course Name</th>
+                  <th scope="col">Grade</th>
+                  <th scope="col"></th>  
+                </tr>
+              </thead>
+              <tbody>
+
+              </tbody>
+            </table>
+          </div>
           <div class="tab-pane fade" id="add_results" role="tabpanel">
             <form>
               <div class="form-group">
-                <label for="student_name">Select Student</label>
-                <select class="form-control" id="student_name"></select>
+                <label for="student_id">Select Student</label>
+                <select class="form-control" name="student_id"></select>
               </div>
               <div class="form-group">
-                <label for="course_name">Select Course</label>
-                <select class="form-control" id="course_name"></select>
+                <label for="course_id">Select Course</label>
+                <select class="form-control" name="course_id"></select>
               </div>
 
               <div class="form-group">
                 <label for="grade">Select Grade</label>
-                <select class="form-control" id="grade">
+                <select class="form-control" name="grade">
                   <option>A</option>
                   <option>B</option>
                   <option>C</option>
@@ -133,7 +136,8 @@
     </div>
 
     <!-- Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script src="{{ url_for('static', filename = 'app.js') }}"></script>
   </body>
 </html>

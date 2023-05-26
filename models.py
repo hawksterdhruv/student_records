@@ -1,16 +1,15 @@
 
 from datetime import date
 
-import sqlalchemy as sa
 from db import db
 
 
 class Student(db.Model):
-    id = sa.Column(sa.Integer, primary_key=True)
-    first_name = sa.Column(sa.String, nullable=False)
-    family_name = sa.Column(sa.String, nullable=False)
-    date_of_birth = sa.Column(sa.Date, nullable=False)
-    email = sa.Column(sa.String, nullable=False)
+    id = db.Column(db.Integer, primary_key=True)
+    first_name = db.Column(db.String, nullable=False)
+    family_name = db.Column(db.String, nullable=False)
+    date_of_birth = db.Column(db.Date, nullable=False)
+    email = db.Column(db.String, nullable=False)
 
     def to_dict(self):
         return {
@@ -33,8 +32,8 @@ class Student(db.Model):
 
 
 class Course(db.Model):
-    id = sa.Column(sa.Integer, primary_key=True)
-    course_name = sa.Column(sa.String, nullable=False)
+    id = db.Column(db.Integer, primary_key=True)
+    course_name = db.Column(db.String, nullable=False)
 
     def to_dict(self):
         return {
@@ -51,11 +50,13 @@ class Course(db.Model):
 
 
 class Result(db.Model):
-    id = sa.Column(sa.Integer, primary_key=True)
-    student_id = sa.Column(sa.ForeignKey(Student.id), nullable=False)
-    course_id = sa.Column(sa.ForeignKey(Course.id), nullable=False)
+    id = db.Column(db.Integer, primary_key=True)
+    student_id = db.Column(db.ForeignKey(Student.id), nullable=False)
+    course_id = db.Column(db.ForeignKey(Course.id), nullable=False)
     # Todo : Change grade to enum instead of String
-    grade = sa.Column(sa.String, nullable=False)
+    grade = db.Column(db.String, nullable=False)
+    student = db.relationship('Student')
+    course = db.relationship('Course')
 
     def to_dict(self):
         return {
@@ -63,6 +64,8 @@ class Result(db.Model):
             "student_id": self.student_id,
             "course_id": self.course_id,
             "grade": self.grade,
+            "student": self.student.to_dict(),
+            "course": self.course.to_dict()
         }
 
     @classmethod

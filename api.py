@@ -1,28 +1,24 @@
 import json
 from typing import Dict, List
+
 from flask import Flask, jsonify, render_template, request
+
+from db import db
 from models import Student, Course, Result
 
-# from schemas import StudentSchema
-from db import db
 
-# from serializer import ma
 
 app = Flask(__name__)
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///project.db"
 db.init_app(app)
 
+
 with app.app_context():
     db.create_all()
 
-
 @app.route("/")
 def home():
-    students: List[Dict] = [student.to_dict() for student in Student.query.all()]
-    courses: List[Dict] = [course.to_dict() for course in Course.query.all()]
-    results: List[Dict] = [result.to_dict() for result in Result.query.all()]
-    data = {"students": students, "courses": courses, "results": results}
-    return render_template("index.html", data=data)
+    return render_template("index.html")
 
 
 ##################################
@@ -30,11 +26,10 @@ def home():
 
 @app.route("/api/v1/students")
 def students():
+
     students_results: List[Student] = Student.query.all()
     student_list: List[Dict] = [student.to_dict() for student in students_results]
 
-    json.dumps({"data": student_list, "message": "SUCCESS"})
-    # students_schema = StudentSchema()
     return jsonify({"data": student_list, "message": "SUCCESS"})
 
 
@@ -47,6 +42,7 @@ def get_student(id):
 @app.route("/api/v1/student/", methods=["POST"])
 def add_student():
     student_raw = request.get_json()
+    print(student_raw)
     new_student = Student().from_dict(student_raw)
 
     # Todo: Add validation here or check validation here
@@ -70,9 +66,6 @@ def delete_student(id):
 def courses():
     courses_results: List[Course] = Course.query.all()
     course_list: List[Dict] = [course.to_dict() for course in courses_results]
-
-    json.dumps({"data": course_list, "message": "SUCCESS"})
-    # courses_schema = courseSchema()
     return jsonify({"data": course_list, "message": "SUCCESS"})
 
 
@@ -86,6 +79,7 @@ def get_course(id):
 def add_course():
     course_raw = request.get_json()
     new_course = Course().from_dict(course_raw)
+    print(course_raw)
 
     # Todo: Add validation here or check validation here
     db.session.add(new_course)
@@ -109,8 +103,6 @@ def results():
     results_results: List[Result] = Result.query.all()
     result_list: List[Dict] = [result.to_dict() for result in results_results]
 
-    json.dumps({"data": result_list, "message": "SUCCESS"})
-    # results_schema = resultSchema()
     return jsonify({"data": result_list, "message": "SUCCESS"})
 
 
