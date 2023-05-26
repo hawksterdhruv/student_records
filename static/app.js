@@ -56,6 +56,8 @@ add_student = (e) => {
       $("#student-form-error").show();
     } else {
       $("#student-form-success").show();
+      $("#add_students form")[0].reset()
+
     }
     list_student();
     console.log(record);
@@ -122,10 +124,10 @@ add_course = (e) => {
   }).done(function (record) {
     if (record.message !== "SUCCESS") {
       $("#course-form-error .custom-message").html("<br>" + record.message);
-      
       $("#course-form-error").show();
     } else {
       $("#course-form-success").show();
+      $("#add_courses form")[0].reset()
     }
     list_course();
     console.log(record);

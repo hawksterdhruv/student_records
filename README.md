@@ -24,7 +24,8 @@ Single page app to maintain students, courses, and their results
 10. ~~Date of birth 10 years check missing~~
 11. ~~Success messages missing~~
 12. Delete messages missing ?? 
-13. Form clear
+13. ~~Form clear~~
 14. Grades in ENUM in the ORM
 15. Add validation for duplicate results
 16. Auto dismiss error/success messages??
+17. Improve Delete button
