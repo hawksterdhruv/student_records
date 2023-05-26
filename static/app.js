@@ -52,9 +52,11 @@ add_student = (e) => {
     contentType: "application/json",
   }).done(function (record) {
     if (record.message !== "SUCCESS") {
-        $("#student-form-error .custom-message").html("<br>" + record.message);
-        $("#student-form-error").show();
-      }
+      $("#student-form-error .custom-message").html("<br>" + record.message);
+      $("#student-form-error").show();
+    } else {
+      $("#student-form-success").show();
+    }
     list_student();
     console.log(record);
   });
@@ -67,7 +69,6 @@ delete_student = (student_id) => {
     url: "api/v1/student/" + student_id,
     dataType: "json",
   }).done(function (record) {
-
     list_student();
     console.log(record);
     // clear table and call student_list
@@ -120,7 +121,10 @@ add_course = (e) => {
   }).done(function (record) {
     if (record.message !== "SUCCESS") {
       $("#course-form-error .custom-message").html("<br>" + record.message);
+      
       $("#course-form-error").show();
+    } else {
+      $("#course-form-success").show();
     }
     list_course();
     console.log(record);
@@ -189,6 +193,7 @@ add_result = (e) => {
     dataType: "json",
     contentType: "application/json",
   }).done(function (record) {
+    $("#result-form-success").show();  
     list_result();
     console.log(record);
   });

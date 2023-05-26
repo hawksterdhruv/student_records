@@ -2,6 +2,7 @@
 - Currently also acts as the entry point for flask web server. 
 Author : Dhruv Shah
 """
+from datetime import date
 from typing import Dict, List
 import re
 
@@ -97,7 +98,20 @@ def validate_student_record(student_raw:Dict)->List:
     if not student_raw['email'].strip() or not re.fullmatch(regex, student_raw['email'].strip()):
         error_message.append("Invalid Email")
     if not student_raw['date_of_birth'].strip():
+        print("ARRIVED HERE")
         error_message.append("Invalid Date of Birth")
+    else:
+        try:
+            dob = date.fromisoformat(student_raw['date_of_birth'])
+        except Exception as e:
+            error_message.append("Invalid Date of Birth")
+        else:
+            print("TRIED THIS")
+            age = date.today() - dob
+            print(age)
+            if age.days < 3650:
+                error_message.append("Student too young")
+
     return error_message
 
 
