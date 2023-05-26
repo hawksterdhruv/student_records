@@ -3,6 +3,7 @@
 Author : Dhruv Shah
 """
 from typing import Dict, List
+import re
 
 from flask import Flask, Response, jsonify, render_template, request
 
@@ -67,12 +68,37 @@ def add_student() -> Response:
         Response: returns json document for successful addition of student or error message
     """
     student_raw = request.get_json()
+    error_message = validate_student_record(student_raw)
+    if error_message:
+        return jsonify({"data": None, "message": ", ".join(error_message)})
+
     new_student = Student().from_dict(student_raw)
 
-    # Todo: Add validation here or check validation here
+    
     db.session.add(new_student)
     db.session.commit()
     return jsonify({"data": new_student.to_dict(), "message": "SUCCESS"})
+
+def validate_student_record(student_raw:Dict)->List:
+    """Check student records and generates error messages
+
+    Args:
+        student_raw (Dict): student record from front end
+
+    Returns:
+        List: List of errors in student records
+    """
+    error_message = []
+    if not student_raw['first_name'].strip():
+        error_message.append( "Invalid First Name")
+    if not student_raw['family_name'].strip():
+        error_message.append("Invalid Family Name")
+    regex = r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,7}\b'
+    if not student_raw['email'].strip() or not re.fullmatch(regex, student_raw['email'].strip()):
+        error_message.append("Invalid Email")
+    if not student_raw['date_of_birth'].strip():
+        error_message.append("Invalid Date of Birth")
+    return error_message
 
 
 @app.route("/api/v1/student/<int:student_id>", methods=["DELETE"])
@@ -128,9 +154,10 @@ def add_course()->Response:
         Response: returns json document for successful addition of course or error message
     """
     course_raw = request.get_json()
+    if not course_raw['course_name'].strip():
+        return jsonify({"data":None, "message":"Invalid Course Name"})
     new_course = Course().from_dict(course_raw)
 
-    # Todo: Add validation here or check validation here
     db.session.add(new_course)
     db.session.commit()
     return jsonify({"data": new_course.to_dict(), "message": "SUCCESS"})
@@ -192,7 +219,6 @@ def add_result() -> Response:
     result_raw = request.get_json()
     new_result = Result().from_dict(result_raw)
 
-    # Todo: Add validation here or check validation here
     db.session.add(new_result)
     db.session.commit()
     return jsonify({"data": new_result.to_dict(), "message": "SUCCESS"})

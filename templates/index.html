@@ -12,6 +12,17 @@
       <a class="navbar-brand" href="#">Student Records</a>
     </nav>
     <div class="container-fluid">
+      <div class="alert alert-danger fade show" role="alert" id="course-form-error">
+        Please enter valid course details.
+        <span class="custom-message"></span>
+        <button type="button" class="close" data-hide="alert">&times;</button>
+      </div>
+      <div class="alert alert-danger  fade show" role="alert" id="student-form-error">
+        Please enter valid student details.
+        <span class="custom-message"></span>
+        <button type="button" class="close" data-hide="alert">&times;</button>
+      </div>
+
       <div class="row">
         <div class="col-3">
           <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist">
@@ -66,6 +77,7 @@
                 <button type="submit" class="btn btn-primary" onclick="add_student(event)">Submit</button>
               </form>
             </div>
+            <!-- LIST COURSES -->
             <div class="tab-pane fade" id="courses_list" role="tabpanel">
               <table class="table table-striped" id="courses_list-table">
                 <thead>
@@ -75,10 +87,10 @@
                     <th scope="col"></th>
                   </tr>
                 </thead>
-
                 <tbody></tbody>
               </table>
             </div>
+            <!-- ADD COURSES -->
             <div class="tab-pane fade" id="add_courses" role="tabpanel">
               <form>
                 <div class="form-group">
@@ -89,6 +101,7 @@
                 <button type="submit" class="btn btn-primary" onclick="add_course(event)">Submit</button>
               </form>
             </div>
+            <!-- LIST RESULTS -->
             <div class="tab-pane fade" id="results_list" role="tabpanel">
               <table class="table table-striped" id="results_list-table">
                 <thead>
@@ -103,6 +116,7 @@
                 <tbody></tbody>
               </table>
             </div>
+            <!-- ADD RESULTS -->
             <div class="tab-pane fade" id="add_results" role="tabpanel">
               <form>
                 <div class="form-group">

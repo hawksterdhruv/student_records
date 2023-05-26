@@ -5,7 +5,7 @@ Single page app to maintain students, courses, and their results
 1. sqlite does not enforce foreign keys
 2. ~~Delete not working~~
    1. Delete not cascading
-3. Validation not working
+3. ~~Validation not working~~
 4. ~~Give page title~~
 5. ~~Auto refresh page~~
    1. Ensure page goes to the correct tab

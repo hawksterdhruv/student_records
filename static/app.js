@@ -51,8 +51,12 @@ add_student = (e) => {
     dataType: "json",
     contentType: "application/json",
   }).done(function (record) {
+    if (record.message !== "SUCCESS") {
+        $("#student-form-error .custom-message").html("<br>" + record.message);
+        $("#student-form-error").show();
+      }
     list_student();
-    console.log(result);
+    console.log(record);
   });
 };
 
@@ -63,6 +67,7 @@ delete_student = (student_id) => {
     url: "api/v1/student/" + student_id,
     dataType: "json",
   }).done(function (record) {
+
     list_student();
     console.log(record);
     // clear table and call student_list
@@ -113,6 +118,10 @@ add_course = (e) => {
     dataType: "json",
     contentType: "application/json",
   }).done(function (record) {
+    if (record.message !== "SUCCESS") {
+      $("#course-form-error .custom-message").html("<br>" + record.message);
+      $("#course-form-error").show();
+    }
     list_course();
     console.log(record);
   });
@@ -200,8 +209,17 @@ delete_result = (result_id) => {
   });
 };
 
+$(function () {
+  $("[data-hide]").on("click", function () {
+    $(this)
+      .closest("." + $(this).attr("data-hide"))
+      .hide();
+  });
+});
+
 $(document).ready(function () {
   list_course();
   list_result();
   list_student();
+  $(".alert").hide();
 });
